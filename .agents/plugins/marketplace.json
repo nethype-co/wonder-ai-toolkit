@@ -1,0 +1,12 @@
+{
+  "name": "nethype",
+  "interface": { "displayName": "Nethype (Wonder theme)" },
+  "plugins": [
+    {
+      "name": "wonder-theme",
+      "source": { "source": "url", "url": "https://github.com/nethype/wonder-ai-toolkit.git" },
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Developer Tools"
+    }
+  ]
+}

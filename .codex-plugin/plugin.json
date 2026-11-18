@@ -1,0 +1,42 @@
+{
+  "name": "wonder-theme",
+  "version": "0.1.0",
+  "description": "Assistant for the Wonder Shopify theme: search the Wonder docs, check known issues for your theme version, and build custom sections that follow Wonder conventions and pass validation. Connects to the hosted Wonder MCP server (mcp.wonder-theme.com); no account needed.",
+  "author": {
+    "name": "Nethype",
+    "url": "https://wonder-theme.com"
+  },
+  "homepage": "https://support.wonder-theme.com",
+  "repository": "https://github.com/nethype/wonder-ai-toolkit",
+  "license": "MIT",
+  "keywords": [
+    "shopify",
+    "wonder",
+    "theme",
+    "liquid",
+    "sections"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Wonder Theme",
+    "shortDescription": "Build and fix Wonder Shopify theme stores",
+    "longDescription": "Answers from the official Wonder theme documentation, checks known issues and workarounds for your Wonder version, and builds custom sections that look native to Wonder and pass validation before you paste them into your store.",
+    "developerName": "Nethype",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive"
+    ],
+    "websiteURL": "https://wonder-theme.com",
+    "defaultPrompt": [
+      "Create a custom Wonder section with three testimonials and a background image.",
+      "My mega menu looks blurred on Wonder 2.5.1. Is this a known issue?",
+      "How do I open the Wonder cart drawer from my own JavaScript?"
+    ],
+    "privacyPolicyURL": "https://www.nethype.co/privacy-policy",
+    "supportURL": "https://support.wonder-theme.com",
+    "logo": "./assets/icon.png",
+    "composerIcon": "./assets/logo.svg",
+    "brandColor": "#111111"
+  }
+}

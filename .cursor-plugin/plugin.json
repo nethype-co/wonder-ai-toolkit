@@ -1,0 +1,20 @@
+{
+  "name": "wonder-theme",
+  "version": "0.1.0",
+  "description": "Assistant for the Wonder Shopify theme: search the Wonder docs, check known issues for your theme version, and build custom sections that follow Wonder conventions and pass validation. Connects to the hosted Wonder MCP server (mcp.wonder-theme.com); no account needed.",
+  "author": {
+    "name": "Nethype"
+  },
+  "homepage": "https://support.wonder-theme.com",
+  "repository": "https://github.com/nethype/wonder-ai-toolkit",
+  "license": "MIT",
+  "keywords": [
+    "shopify",
+    "wonder",
+    "theme",
+    "liquid",
+    "sections"
+  ],
+  "mcpServers": "./.mcp.json",
+  "logo": "assets/logo.svg"
+}

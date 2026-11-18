@@ -1,0 +1,14 @@
+{
+  "name": "nethype",
+  "owner": { "name": "Nethype", "url": "https://wonder-theme.com" },
+  "description": "Nethype plugins for Shopify themes (Wonder).",
+  "plugins": [
+    {
+      "name": "wonder-theme",
+      "source": "./",
+      "description": "Wonder Shopify theme assistant: docs search, known issues per version, custom section blueprints and validation.",
+      "category": "development",
+      "tags": ["shopify", "wonder", "theme"]
+    }
+  ]
+}
