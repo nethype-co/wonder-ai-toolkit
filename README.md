@@ -65,6 +65,8 @@ All tools are read-only. Your model writes the code; the server never generates 
 
 ## Data and privacy
 
+Full privacy notice: https://support.wonder-theme.com/ai-agents/privacy
+
 The plugin sends tool requests to `https://mcp.wonder-theme.com`, operated by Nethype on Cloudflare:
 
 - `search_docs` and `get_known_issues`: your search text and theme version;
