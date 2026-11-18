@@ -50,39 +50,45 @@ node "${CLAUDE_PLUGIN_ROOT}/skills/wonder-update/scripts/compare.mjs" wonder-cur
 
 In other agents the script is `scripts/compare.mjs` next to this file.
 
-It reads the version from `config/settings_schema.json`, downloads the original release's file fingerprints from `mcp.wonder-theme.com` and prints JSON lists of `modified`, `added` and `deleted` files. File contents never leave the machine. Settings and content JSON is skipped, because Shopify carries it over.
+It reads the version from `config/settings_schema.json` and compares every file with the original release, using fingerprints (short hashes) downloaded from `mcp.wonder-theme.com`. Your files are never uploaded, and the original Wonder code is never downloaded. Settings and content JSON is skipped, because Shopify carries it over. It prints:
+
+- `modified`, `added` and `deleted` files;
+- `changes`: for each modified code file, the merchant's own lines (`yourLines`, line numbers in their file, with a preview) and how many original lines they removed at each spot.
+
+Summarise the customisations for the user in plain words (e.g. "bigger checkout button in the cart drawer CSS", "extra class on the background video section").
 
 If the output has a `warning` (most files differ), the version is probably wrong or the files were reformatted. Fix that before going on.
 
 ## 4. Get the plan
 
-Call `plan_update` with `from` (the current version), `to` (the new version) and the three lists from the script. **Pass paths only, never file contents.** The plan sorts files into:
-
-| Group | What to do in `wonder-new` |
-|---|---|
-| Copy as is | The merchant's own files (e.g. `sections/custom-*.liquid`). Copy unchanged. |
-| Copy over | Changed by the merchant, untouched by Wonder between the versions. Copy the old file over the new one. |
-| Merge by hand | Changed by both. Start from the **new** file and re-apply only the merchant's changes. Never copy the old file over: it would undo Wonder's fixes. |
-| Translations | Re-apply the merchant's own texts. Don't copy the old locale file. |
-| Removed upstream | Wonder no longer has the file. Re-implement the change elsewhere (Custom CSS or a custom section). |
-| Name clash | Wonder now ships a file with the same name. Rename the merchant's file (`custom-` prefix) and update references. |
+Call `plan_update` with `from` (the current version), `to` (the new version) and the `modified`, `added` and `deleted` lists. **Pass paths only, never file contents.** It tells you which files are the merchant's own, which Wonder didn't touch (safe to copy over), which both sides changed (need a merge), and what Wonder removed or renamed.
 
 ## 5. Apply it
 
-For each merge:
-1. Find the merchant's changes. Best source: the original file of the current version (git history, or the file's Timeline view in Shopify admin → Edit code; history may not reach back that far). Otherwise compare `wonder-current/<file>` with `wonder-new/<file>` and use the changelog to tell Wonder's changes from the merchant's.
-2. Re-apply them to `wonder-new/<file>` as small, targeted edits.
-3. Show the user the result (`git diff` in `wonder-new`) and explain each re-applied change.
-
-Ask the user before dropping a customisation you can't port cleanly.
-
-Then check the code:
+Let the script port the changes into the new copy:
 
 ```bash
-cd wonder-new && shopify theme check
+node "${CLAUDE_PLUGIN_ROOT}/skills/wonder-update/scripts/compare.mjs" wonder-current --merge wonder-new
 ```
 
-Use `validate_section` on custom sections.
+It writes into `wonder-new` only:
+
+| Report key | What happened |
+|---|---|
+| `copiedOwn` | The merchant's own files, copied unchanged |
+| `copiedOver` | Files Wonder didn't change between the versions: the merchant's version copied over |
+| `merged` | Three-way merged: the new Wonder file with the merchant's changes applied |
+| `conflicts` | Both sides changed the same lines. The file has `<<<<<<<` / `=======` / `>>>>>>>` markers showing the merchant's version and Wonder's new version |
+| `manual` | Not merged automatically (translations, non-code files): handle by hand |
+| `nameClash`, `removedUpstream` | As in the plan: rename the merchant's file, or re-implement the change elsewhere |
+
+Then:
+1. Resolve every conflict: keep Wonder's new code and re-apply the merchant's intent on top of it. Explain each decision. Ask the user when the intent isn't clear.
+2. Check that no markers are left: `grep -rn "^<<<<<<<\|^=======\|^>>>>>>>" wonder-new/{assets,blocks,layout,sections,snippets}`.
+3. Show the user `git diff` in `wonder-new`: it must contain only the merchant's customisations.
+4. Check the code: `cd wonder-new && shopify theme check`. Use `validate_section` on custom sections.
+
+Ask the user before dropping a customisation you can't port cleanly.
 
 ## 6. Upload only what you changed
 
@@ -93,7 +99,7 @@ shopify theme push --store <store>.myshopify.com --theme <new-id> --path wonder-
   --only sections/custom-faq.liquid --only snippets/cart-additional-features.liquid   # one --only per file
 ```
 
-Never pass the live theme's ID here.
+List every file from `copiedOwn`, `copiedOver`, `merged` and the resolved `conflicts`. Never pass the live theme's ID here.
 
 ## 7. Check and publish
 

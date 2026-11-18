@@ -5,7 +5,7 @@ Plugin for AI coding agents working on Shopify stores that run the [Wonder theme
 - answer from the official [Wonder documentation](https://support.wonder-theme.com), with links;
 - check **known issues** for the store's Wonder version, with workarounds and the version that fixes them;
 - build **custom sections** that look native to Wonder, stay update-safe and pass validation before you paste them into your store;
-- **update a customised store** to a new Wonder version: find which theme files were changed, get a copy/merge plan, and move the changes to the new theme copy;
+- **update a customised store** to a new Wonder version: find exactly which lines were changed, merge them into the new theme copy automatically, and flag real conflicts;
 - answer **what changed in which version** from the release notes.
 
 The plugin contains four skills and a connection to the hosted Wonder MCP server. No account is needed; the only local code is a small file-comparison script used when updating the theme.
@@ -45,7 +45,7 @@ Add a remote MCP server: `https://mcp.wonder-theme.com/mcp` (Streamable HTTP, no
 |---|---|
 | `wonder-sections` | New or changed custom sections: blueprint → adapt → validate → ready-to-paste file with install steps |
 | `wonder-troubleshooting` | Something looks wrong: known issues for your version, then docs, then the least invasive fix |
-| `wonder-update` | Moving customisations to a new Wonder version: compare with the original release, plan, port, check, publish |
+| `wonder-update` | Moving customisations to a new Wonder version: finds your exact changes, merges them into the new version (three-way), flags conflicts, then check and publish |
 | `wonder-setup` | Getting started: connection check, theme version, Shopify admin vs. Shopify CLI workflow |
 
 In Claude Code the skills load on their own when relevant, or run them directly, e.g. `/wonder-theme:wonder-sections`.
@@ -74,7 +74,7 @@ The plugin sends tool requests to `https://mcp.wonder-theme.com`, operated by Ne
 
 For usage statistics the server keeps request metadata for up to 90 days: tool name, client name and version, search text (shortened), theme version, result counts, the IDs of failed validation rules, and timing. For `plan_update` this includes the list of changed file paths, which shows us which parts of Wonder merchants customise most.
 
-No code or store data is stored. Cloudflare's standard request logs (which include the IP address) are kept for 7 days for debugging and abuse protection. The plugin has no hooks. The `wonder-update` skill includes one script, `skills/wonder-update/scripts/compare.mjs`, which the agent runs on your theme folder when you update: it reads the files locally, downloads the original release's file fingerprints from `https://mcp.wonder-theme.com/manifests/<version>.json`, and sends nothing.
+No code or store data is stored. Cloudflare's standard request logs (which include the IP address) are kept for 7 days for debugging and abuse protection. The plugin has no hooks. The `wonder-update` skill includes one script, `skills/wonder-update/scripts/compare.mjs`, which the agent runs on your theme folders when you update. It downloads fingerprints (short hashes) of the original release's files and lines from `https://mcp.wonder-theme.com`, then finds your changes and merges them into the new version locally. It never uploads your files.
 
 ## Works well with
 
