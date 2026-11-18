@@ -104,7 +104,7 @@ List every file from `copiedOwn`, `copiedOver`, `merged` and the resolved `confl
 ## 7. Check and publish
 
 1. Preview the new copy (Online Store → Themes → new copy → **⋯ → Preview**, or share the preview link with the merchant). Check home, collection, product, cart drawer, search, and every page that uses a ported file, on desktop and mobile.
-2. Check that Theme settings → Custom CSS still matches existing elements.
+2. Check that Custom CSS still matches existing elements: run `validate_css` on the store's Theme settings → Custom CSS (and any section Custom CSS) with `version` set to the **new** Wonder version. Classes Wonder renamed or removed show up as warnings.
 3. The merchant publishes the new copy when they're happy. Keep the old copy for a few weeks as a rollback.
 
 ## Without Shopify CLI

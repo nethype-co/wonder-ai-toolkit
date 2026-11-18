@@ -16,7 +16,7 @@ Many reports are known issues with a fix in a newer Wonder version or a document
 3. **Check the docs and settings.** Call `search_docs` for the area involved and cite the URLs you used. Many "bugs" are a setting in the theme editor: `get_section_schema` shows every setting of the section involved, with the label the merchant sees.
 4. **Only then propose a change**, in this order of preference:
    1. a theme setting;
-   2. a short rule in **Theme settings → Custom CSS** (survives theme updates);
+   2. a short Custom CSS rule (survives theme updates): find real selectors with `find_selector`, check the CSS with `validate_css`, and use the section's own Custom CSS when only one section is affected;
    3. a custom section (see the `wonder-sections` skill);
    4. editing a theme file, as a last resort. Say clearly that the edit is lost when the merchant updates Wonder and has to be re-applied.
 

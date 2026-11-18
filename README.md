@@ -63,6 +63,8 @@ In Claude Code the skills load on their own when relevant, or run them directly,
 | `list_sections` | Sections and theme blocks of a Wonder version, with settings counts, block types and limits |
 | `get_section_schema` | Every setting of one section or block, with the labels merchants see in the theme editor |
 | `get_component_api` | Documented JavaScript API: events, cart drawer methods, web components |
+| `find_selector` | Real CSS classes and variables for an element in your Wonder version |
+| `validate_css` | Checks Custom CSS against Shopify's rules and your Wonder version |
 | `plan_update` | Turns a list of changed file paths into an update plan (copy, copy over, merge) |
 
 All tools are read-only. Your model writes the code; the server never generates code or calls an AI model.
@@ -76,7 +78,8 @@ The plugin sends tool requests to `https://mcp.wonder-theme.com`, operated by Ne
 - `search_docs` and `get_known_issues`: your search text and theme version;
 - `validate_section`: the section code you ask it to check. The code is validated in memory and **not stored or logged**;
 - `get_changelog`: versions and search text;
-- `list_sections`, `get_section_schema`, `get_component_api`: versions, section or block names and search text;
+- `list_sections`, `get_section_schema`, `get_component_api`, `find_selector`: versions, section or block names and search text;
+- `validate_css`: the CSS you ask it to check, processed in memory and not stored;
 - `plan_update`: theme versions and the paths of changed files (e.g. `sections/header.liquid`), never file contents.
 
 For usage statistics the server keeps request metadata for up to 90 days: tool name, client name and version, search text (shortened), theme version, result counts, the IDs of failed validation rules, and timing. For `plan_update` this includes the list of changed file paths, which shows us which parts of Wonder merchants customise most.

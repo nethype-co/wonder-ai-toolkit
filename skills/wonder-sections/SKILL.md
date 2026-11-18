@@ -34,7 +34,11 @@ Before building anything, call `list_sections` (with a `query` such as "testimon
 
 ## When not to create a section
 
-- Small visual tweaks to an existing Wonder section (colour, spacing, hiding an element) belong in **Theme settings → Custom CSS**, which carries over on theme updates. Write a short CSS rule scoped to that section instead of a new section.
+- Small visual tweaks to an existing Wonder section (colour, spacing, hiding an element) belong in Custom CSS, which carries over on theme updates. Don't build a new section for them:
+  1. Check `get_section_schema` first: a setting may already do it.
+  2. Find the real classes or CSS variables with `find_selector` (don't guess class names).
+  3. Put a rule for one section in **that section's Custom CSS** (theme editor → section → Custom CSS, 500 characters, scoped to the section automatically). Put store-wide rules in **Theme settings → Custom CSS** (1500 characters).
+  4. Run `validate_css` with the matching `scope` (`section` or `theme`) and the store's Wonder `version`, then fix every error.
 - Before suggesting an edit to a Wonder core file, check `search_docs`: there is often a theme setting for it. Core file edits are lost on every update.
 
 ## Questions about Wonder features
