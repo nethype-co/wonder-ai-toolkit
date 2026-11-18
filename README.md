@@ -8,7 +8,7 @@ Plugin for AI coding agents working on Shopify stores that run the [Wonder theme
 - **update a customised store** to a new Wonder version: find exactly which lines were changed, merge them into the new theme copy automatically, and flag real conflicts;
 - answer **what changed in which version** from the release notes.
 
-The plugin contains four skills and a connection to the hosted Wonder MCP server. No account is needed, and the plugin itself contains no code: only instructions (skills) and the server address.
+The plugin contains five skills and a connection to the hosted Wonder MCP server. No account is needed, and the plugin itself contains no code: only instructions (skills) and the server address.
 
 ## Install
 
@@ -46,6 +46,7 @@ Add a remote MCP server: `https://mcp.wonder-theme.com/mcp` (Streamable HTTP, no
 | `wonder-sections` | New or changed custom sections: blueprint → adapt → validate → ready-to-paste file with install steps |
 | `wonder-troubleshooting` | Something looks wrong: known issues for your version, then docs, then the least invasive fix |
 | `wonder-update` | Moving customisations to a new Wonder version: finds your exact changes, merges them into the new version (three-way), flags conflicts, then check and publish |
+| `wonder-javascript` | Custom JavaScript built on Wonder's documented events, cart drawer API and web components |
 | `wonder-setup` | Getting started: connection check, theme version, Shopify admin vs. Shopify CLI workflow |
 
 In Claude Code the skills load on their own when relevant, or run them directly, e.g. `/wonder-theme:wonder-sections`.
@@ -59,6 +60,9 @@ In Claude Code the skills load on their own when relevant, or run them directly,
 | `get_section_blueprint` | Starting code for a Wonder-native custom section |
 | `validate_section` | Checks a section file against Shopify schema rules and Wonder conventions |
 | `get_changelog` | Release notes: what was added, changed or fixed in which version |
+| `list_sections` | Sections and theme blocks of a Wonder version, with settings counts, block types and limits |
+| `get_section_schema` | Every setting of one section or block, with the labels merchants see in the theme editor |
+| `get_component_api` | Documented JavaScript API: events, cart drawer methods, web components |
 | `plan_update` | Turns a list of changed file paths into an update plan (copy, copy over, merge) |
 
 All tools are read-only. Your model writes the code; the server never generates code or calls an AI model.
@@ -72,6 +76,7 @@ The plugin sends tool requests to `https://mcp.wonder-theme.com`, operated by Ne
 - `search_docs` and `get_known_issues`: your search text and theme version;
 - `validate_section`: the section code you ask it to check. The code is validated in memory and **not stored or logged**;
 - `get_changelog`: versions and search text;
+- `list_sections`, `get_section_schema`, `get_component_api`: versions, section or block names and search text;
 - `plan_update`: theme versions and the paths of changed files (e.g. `sections/header.liquid`), never file contents.
 
 For usage statistics the server keeps request metadata for up to 90 days: tool name, client name and version, search text (shortened), theme version, result counts, the IDs of failed validation rules, and timing. For `plan_update` this includes the list of changed file paths, which shows us which parts of Wonder merchants customise most.

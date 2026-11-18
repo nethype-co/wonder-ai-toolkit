@@ -13,7 +13,7 @@ Many reports are known issues with a fix in a newer Wonder version or a document
 2. **Check known issues.** Call `get_known_issues` with the `version` and a short `query` describing the symptom (e.g. `mega menu blurred`). If it matches:
    - give the workaround;
    - say whether updating Wonder fixes it and which version does.
-3. **Check the docs.** Call `search_docs` for the area involved. Many "bugs" are a setting in the theme editor. Cite the URLs you used.
+3. **Check the docs and settings.** Call `search_docs` for the area involved and cite the URLs you used. Many "bugs" are a setting in the theme editor: `get_section_schema` shows every setting of the section involved, with the label the merchant sees.
 4. **Only then propose a change**, in this order of preference:
    1. a theme setting;
    2. a short rule in **Theme settings → Custom CSS** (survives theme updates);

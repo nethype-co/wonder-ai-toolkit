@@ -28,6 +28,10 @@ You write the code. The `wonder` MCP server gives you a Wonder-native starting p
 
 If the user works in a local theme folder (Shopify CLI), write the file to `sections/custom-<handle>.liquid` instead of pasting, and tell them to preview with `shopify theme dev` before pushing.
 
+## Check what Wonder already has
+
+Before building anything, call `list_sections` (with a `query` such as "testimonial" or "logo") to see whether a Wonder section already does the job, and `get_section_schema` to see its settings. Often the answer is "add the X section and turn on setting Y", which survives every theme update. When you do build a custom section, use the schema of a similar Wonder section as a model for setting names, types and ranges.
+
 ## When not to create a section
 
 - Small visual tweaks to an existing Wonder section (colour, spacing, hiding an element) belong in **Theme settings → Custom CSS**, which carries over on theme updates. Write a short CSS rule scoped to that section instead of a new section.
@@ -35,4 +39,4 @@ If the user works in a local theme folder (Shopify CLI), write the file to `sect
 
 ## Questions about Wonder features
 
-For anything about existing Wonder sections, settings, JavaScript events, the cart drawer API or CSS variables, call `search_docs` and cite the returned URLs.
+For existing sections and their settings, use `list_sections` and `get_section_schema`. For JavaScript events, the cart drawer API and web components, use `get_component_api`. For everything else, call `search_docs` and cite the returned URLs.
