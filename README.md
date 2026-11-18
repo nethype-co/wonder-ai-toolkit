@@ -13,25 +13,25 @@ The plugin contains three skills and a connection to the hosted Wonder MCP serve
 **Claude Code**
 
 ```bash
-claude plugin marketplace add nethype/wonder-ai-toolkit
+claude plugin marketplace add nethype-co/wonder-ai-toolkit
 claude plugin install wonder-theme@nethype
 ```
 
 **Codex**
 
 ```bash
-codex plugin marketplace add nethype/wonder-ai-toolkit
+codex plugin marketplace add nethype-co/wonder-ai-toolkit
 ```
 
 Then open the Plugins directory, choose **Nethype (Wonder theme)** and install **Wonder Theme**.
 
 **Cursor**
 
-Settings → Plugins → add from repository: `https://github.com/nethype/wonder-ai-toolkit`
+Settings → Plugins → add from repository: `https://github.com/nethype-co/wonder-ai-toolkit`
 
 **VS Code (Copilot agent plugins)**
 
-Enable the Agent plugins preview, then Command Palette → **Chat: Install Plugin From Source** → `https://github.com/nethype/wonder-ai-toolkit`
+Enable the Agent plugins preview, then Command Palette → **Chat: Install Plugin From Source** → `https://github.com/nethype-co/wonder-ai-toolkit`
 
 **Any other MCP client** (Claude Desktop, claude.ai custom connector, ChatGPT, Windsurf…)
 
