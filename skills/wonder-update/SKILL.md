@@ -1,6 +1,6 @@
 ---
 name: wonder-update
-description: Update a customised Shopify store from one Wonder theme version to a newer one without losing code changes. Find which theme files were changed, plan what to copy or merge, move the changes to the new theme copy with Shopify CLI, and check it before publishing. Use when the user wants to update or upgrade Wonder, asks what they lose by updating, or needs to move customisations between theme copies.
+description: "Update a customised Shopify store from one Wonder theme version to a newer one without losing code changes. Find which theme files were changed, plan what to copy or merge, move the changes to the new theme copy with Shopify CLI, and check it before publishing. Use when the user wants to update or upgrade Wonder, asks what they lose by updating, or needs to move customisations between theme copies."
 ---
 
 # Updating a customised Wonder theme
@@ -42,13 +42,13 @@ cd wonder-new && git init -q && git add -A && git commit -qm "Wonder <new versio
 
 ## 3. Find what was customised
 
-Run the compare script from this skill on the **current** theme. In Claude Code:
+Run Wonder's update tool on the **current** theme. It needs Node.js 18+, which Shopify CLI already requires:
 
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/skills/wonder-update/scripts/compare.mjs" wonder-current
+npx -y wonder-theme-update@0.3.0 wonder-current
 ```
 
-In other agents the script is `scripts/compare.mjs` next to this file.
+The tool is the npm package [`wonder-theme-update`](https://www.npmjs.com/package/wonder-theme-update), published by Nethype. Keep the pinned version.
 
 It reads the version from `config/settings_schema.json` and compares every file with the original release, using fingerprints (short hashes) downloaded from `mcp.wonder-theme.com`. Your files are never uploaded, and the original Wonder code is never downloaded. Settings and content JSON is skipped, because Shopify carries it over. It prints:
 
@@ -65,13 +65,13 @@ Call `plan_update` with `from` (the current version), `to` (the new version) and
 
 ## 5. Apply it
 
-Let the script port the changes into the new copy:
+Let the tool port the changes into the new copy:
 
 ```bash
-node "${CLAUDE_PLUGIN_ROOT}/skills/wonder-update/scripts/compare.mjs" wonder-current --merge wonder-new
+npx -y wonder-theme-update@0.3.0 wonder-current --merge wonder-new
 ```
 
-It writes into `wonder-new` only:
+It changes files in `wonder-new` only:
 
 | Report key | What happened |
 |---|---|

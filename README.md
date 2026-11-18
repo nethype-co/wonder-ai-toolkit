@@ -8,7 +8,7 @@ Plugin for AI coding agents working on Shopify stores that run the [Wonder theme
 - **update a customised store** to a new Wonder version: find exactly which lines were changed, merge them into the new theme copy automatically, and flag real conflicts;
 - answer **what changed in which version** from the release notes.
 
-The plugin contains four skills and a connection to the hosted Wonder MCP server. No account is needed; the only local code is a small file-comparison script used when updating the theme.
+The plugin contains four skills and a connection to the hosted Wonder MCP server. No account is needed, and the plugin itself contains no code: only instructions (skills) and the server address.
 
 ## Install
 
@@ -76,7 +76,7 @@ The plugin sends tool requests to `https://mcp.wonder-theme.com`, operated by Ne
 
 For usage statistics the server keeps request metadata for up to 90 days: tool name, client name and version, search text (shortened), theme version, result counts, the IDs of failed validation rules, and timing. For `plan_update` this includes the list of changed file paths, which shows us which parts of Wonder merchants customise most.
 
-No code or store data is stored. Cloudflare's standard request logs (which include the IP address) are kept for 7 days for debugging and abuse protection. The plugin has no hooks. The `wonder-update` skill includes one script, `skills/wonder-update/scripts/compare.mjs`, which the agent runs on your theme folders when you update. It downloads fingerprints (short hashes) of the original release's files and lines from `https://mcp.wonder-theme.com`, then finds your changes and merges them into the new version locally. It never uploads your files.
+No code or store data is stored. Cloudflare's standard request logs (which include the IP address) are kept for 7 days for debugging and abuse protection. The plugin has no hooks or scripts. When you update the theme, the `wonder-update` skill runs the npm package [`wonder-theme-update`](https://www.npmjs.com/package/wonder-theme-update) (pinned version, published by Nethype) on your theme folders. It downloads fingerprints (short hashes) of the original release's files and lines from `https://mcp.wonder-theme.com`, then finds your changes and merges them into the new version locally. It never uploads your files.
 
 ## Works well with
 

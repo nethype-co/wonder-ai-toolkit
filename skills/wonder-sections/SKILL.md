@@ -1,6 +1,6 @@
 ---
 name: wonder-sections
-description: Build or change a custom section for a Shopify store running the Wonder theme. Use whenever the user asks for a new section, a section layout (testimonials, FAQ, logos, features, image with text…), or changes to a custom section's settings, markup or styling on a Wonder store.
+description: "Build or change a custom section for a Shopify store running the Wonder theme. Use whenever the user asks for a new section, a section layout (testimonials, FAQ, logos, features, image with text…), or changes to a custom section's settings, markup or styling on a Wonder store."
 ---
 
 # Custom sections for the Wonder theme

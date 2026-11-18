@@ -1,6 +1,6 @@
 ---
 name: wonder-setup
-description: Set up a working environment for customising a Shopify store that runs the Wonder theme: check the Wonder connection, find the theme version, and choose between editing in the Shopify admin and working locally with Shopify CLI. Use when the user starts working on a Wonder store or asks how to connect or set things up.
+description: "Set up a working environment for customising a Shopify store that runs the Wonder theme: check the Wonder connection, find the theme version, and choose between editing in the Shopify admin and working locally with Shopify CLI. Use when the user starts working on a Wonder store or asks how to connect or set things up."
 ---
 
 # Setting up work on a Wonder store

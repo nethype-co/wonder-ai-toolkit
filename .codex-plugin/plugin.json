@@ -1,6 +1,6 @@
 {
   "name": "wonder-theme",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "Assistant for the Wonder Shopify theme: search the Wonder docs, check known issues and release notes for your theme version, build custom sections that follow Wonder conventions and pass validation, and update a customised theme to a new Wonder version without losing changes. Connects to the hosted Wonder MCP server (mcp.wonder-theme.com); no account needed.",
   "author": {
     "name": "Nethype",
@@ -37,7 +37,7 @@
     "privacyPolicyURL": "https://support.wonder-theme.com/ai-agents/privacy",
     "supportURL": "https://support.wonder-theme.com",
     "logo": "./assets/icon.png",
-    "composerIcon": "./assets/logo.svg",
+    "composerIcon": "./assets/icon.png",
     "brandColor": "#111111"
   }
 }

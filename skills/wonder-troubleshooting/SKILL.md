@@ -1,6 +1,6 @@
 ---
 name: wonder-troubleshooting
-description: Diagnose and fix problems on a Shopify store running the Wonder theme: something looks broken, misaligned, blurred or missing, a setting doesn't work, or behaviour changed after a theme update. Use before suggesting any code change to a Wonder store.
+description: "Diagnose and fix problems on a Shopify store running the Wonder theme: something looks broken, misaligned, blurred or missing, a setting doesn't work, or behaviour changed after a theme update. Use before suggesting any code change to a Wonder store."
 ---
 
 # Troubleshooting a Wonder store
