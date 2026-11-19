@@ -57,8 +57,9 @@ In Claude Code the skills load on their own when relevant, or run them directly,
 |---|---|
 | `search_docs` | Searches the Wonder documentation |
 | `get_known_issues` | Known bugs and workarounds per Wonder version |
-| `get_section_blueprint` | Starting code for a Wonder-native custom section |
-| `validate_section` | Checks a section file against Shopify schema rules and Wonder conventions, and runs Shopify Theme Check against the store's Wonder version |
+| `get_conventions` | How Wonder builds its sections, measured from its code: standard settings, CSS wiring, snippets, classes, colour and font tokens |
+| `get_section_blueprint` | Starting code for a custom section that follows those conventions |
+| `validate_section` | Checks a section file against Shopify schema rules and the store's Wonder release: consistency with Wonder's conventions and Shopify Theme Check |
 | `get_changelog` | Release notes: what was added, changed or fixed in which version |
 | `list_sections` | Sections and theme blocks of a Wonder version, with settings counts, block types and limits |
 | `get_section_schema` | Every setting of one section or block, with the labels merchants see in the theme editor |
@@ -78,7 +79,7 @@ The plugin sends tool requests to `https://mcp.wonder-theme.com`, operated by Ne
 - `search_docs` and `get_known_issues`: your search text and theme version;
 - `validate_section`: the section code you ask it to check. The code is validated in memory and **not stored or logged**;
 - `get_changelog`: versions and search text;
-- `list_sections`, `get_section_schema`, `get_component_api`, `find_selector`: versions, section or block names and search text;
+- `list_sections`, `get_section_schema`, `get_component_api`, `find_selector`, `get_conventions`: versions, section or block names and search text;
 - `validate_css`: the CSS you ask it to check, processed in memory and not stored;
 - `plan_update`: theme versions and the paths of changed files (e.g. `sections/header.liquid`), never file contents.
 

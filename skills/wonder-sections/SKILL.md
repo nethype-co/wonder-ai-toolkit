@@ -5,32 +5,40 @@ description: "Build or change a custom section for a Shopify store running the W
 
 # Custom sections for the Wonder theme
 
-You write the code. The `wonder` MCP server gives you a Wonder-native starting point and checks the result. Always go through both tools: sections written from scratch usually break Wonder's spacing, restyle other parts of the theme, or get lost on the next theme update.
+You write the code. The `wonder` MCP server tells you how Wonder builds its own sections and checks the result against that. The goal is a section that's **indistinguishable from Wonder's own**: same settings in the theme editor, same spacing, colours, fonts, heading style and animations, same code patterns. A section written from scratch is usually detached from the theme: its own spacing settings, hard-coded colours and fonts, invented CSS variables, and styles that ignore the merchant's Theme settings.
+
+Ask for the store's Wonder version first (Online Store → Themes, shown under the theme name) and pass it to every tool below: conventions, snippets and classes change between releases.
 
 ## Steps
 
-1. **Pick a blueprint.** Call `get_section_blueprint` with:
+1. **Look for an existing Wonder section.** Call `list_sections` with a `query` ("testimonial", "logo", "faq"…). If one does the job, the answer is "add that section and set X" (see below). Otherwise note the closest one: it's your model.
+2. **Learn the conventions.** Call `get_conventions` with the version. It lists what Wonder's sections share, measured from its code: the standard settings to copy as they are (heading group, colours, spacing), the CSS variables they feed, the wrapper, heading and animation markup, shared snippets and classes, and the colour and font tokens.
+3. **Study the closest Wonder section.** With the theme files available (local theme folder), open `sections/<closest>.liquid` and mirror its structure: setting ids and order, how it renders headings, images and buttons, which snippets and classes it uses. Without files, `get_section_schema` shows its settings. Reuse what Wonder has; don't reinvent it.
+4. **Start from a blueprint.** Call `get_section_blueprint` with:
    - `kind`: `basic` (heading, text, button), `blocks` (a grid of repeatable items) or `image-with-text`. Choose the closest one; you will adapt it.
    - `handle`: short kebab-case name, e.g. `trust-badges`. The file becomes `sections/custom-<handle>.liquid`.
    - `name` (optional): the name shown in the theme editor, max 25 characters.
-2. **Adapt it** to the request. Follow the rules returned with the blueprint. The most important ones:
-   - Plain CSS only. No SCSS, no build step.
-   - Every selector stays under the section's own class (`.custom-<handle>`), so the section can't restyle the rest of the store.
-   - Don't create or restyle classes starting with `wt-`; they belong to Wonder core. Using existing Wonder classes in markup for a native look is fine.
-   - Keep the wrapper's `data-section-id` attribute; Wonder's section spacing hooks onto it.
+   - `version`: the store's Wonder version.
+   The blueprint already follows the conventions. Keep its standard settings, `<style>` wiring, wrapper and heading markup; add your settings between the heading group and the colour/spacing group.
+5. **Adapt it** to the request, the Wonder way:
+   - Colours and fonts come from Theme settings: use Wonder's variables (`var(--color-text)`, `var(--color-background)`, `var(--font-headline)`…). Never hard-code hex values or font names; for a colour the merchant picks, add a `color` setting and feed a variable, as the blueprint does.
+   - For a setting Wonder already has (image ratio, alignment, button style, overlay…), reuse its id and definition from `get_conventions` / `get_section_schema` instead of inventing one.
+   - Render Wonder's snippets (`headline`…) and reuse its classes as they are (`rte`, `hero__button--primary`, `wt-section__wrapper`) for a native look. Use only classes and CSS variables that exist: `find_selector` lists them.
+   - Plain CSS only. No SCSS, no build step. Every selector stays under the section's own class (`.custom-<handle>`).
+   - Don't create or restyle classes starting with `wt-`; they belong to Wonder core.
    - Liquid isn't rendered inside `{% stylesheet %}`. Put values that come from settings in the scoped `<style>` block.
    - Use literal labels in the schema, not `t:` translation keys.
-3. **Validate.** Call `validate_section` with the full file and the store's Wonder version. It also runs Shopify Theme Check against that release, so a `render` of a snippet, an asset or a translation key that the store's Wonder doesn't have is an error. Fix every error and validate again until the result is VALID. Fix warnings unless there's a clear reason not to.
-4. **Hand it over.** Give the user:
+6. **Validate.** Call `validate_section` with the full file and the version. It checks Shopify's schema rules, runs Shopify Theme Check against that release, and reports where the section departs from Wonder's conventions (`wonder-*` rules: missing standard settings, settings that do nothing, hard-coded colours and fonts, CSS variables or `wt-` classes that don't exist, heading and animation patterns). Fix every error and warning and validate again until the result is VALID with no warnings; treat `wonder-*` info notes as the default unless there's a clear reason not to.
+7. **Hand it over.** Give the user:
    - the complete file in one code block (never a partial diff for a new section) and its file name;
    - the install steps returned with the blueprint (Edit code → Sections → Add a new section → paste → Save → Customize → Add section → Custom);
    - a reminder that **theme updates don't copy custom section files**: keep a copy and add it to the new theme version before publishing an update.
 
 If the user works in a local theme folder (Shopify CLI), write the file to `sections/custom-<handle>.liquid` instead of pasting, and tell them to preview with `shopify theme dev` before pushing.
 
-## Check what Wonder already has
+## Changing an existing custom section
 
-Before building anything, call `list_sections` (with a `query` such as "testimonial" or "logo") to see whether a Wonder section already does the job, and `get_section_schema` to see its settings. Often the answer is "add the X section and turn on setting Y", which survives every theme update. When you do build a custom section, use the schema of a similar Wonder section as a model for setting names, types and ranges.
+Run `validate_section` on it first, with the store's version. Fix the `wonder-*` findings along with the requested change, so the section moves closer to Wonder's conventions instead of further away.
 
 ## When not to create a section
 
