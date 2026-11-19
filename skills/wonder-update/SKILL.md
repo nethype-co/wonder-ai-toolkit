@@ -86,7 +86,7 @@ Then:
 1. Resolve every conflict: keep Wonder's new code and re-apply the merchant's intent on top of it. Explain each decision. Ask the user when the intent isn't clear.
 2. Check that no markers are left: `grep -rn "^<<<<<<<\|^=======\|^>>>>>>>" wonder-new/{assets,blocks,layout,sections,snippets}`.
 3. Show the user `git diff` in `wonder-new`: it must contain only the merchant's customisations.
-4. Check the code: `cd wonder-new && shopify theme check`. Use `validate_section` on custom sections.
+4. Check the code: `cd wonder-new && shopify theme check`. Use `validate_section` with the new version on custom sections: it reports snippets, assets and translation keys they use that the new Wonder no longer has.
 
 Ask the user before dropping a customisation you can't port cleanly.
 

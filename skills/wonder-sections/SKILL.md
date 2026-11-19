@@ -20,7 +20,7 @@ You write the code. The `wonder` MCP server gives you a Wonder-native starting p
    - Keep the wrapper's `data-section-id` attribute; Wonder's section spacing hooks onto it.
    - Liquid isn't rendered inside `{% stylesheet %}`. Put values that come from settings in the scoped `<style>` block.
    - Use literal labels in the schema, not `t:` translation keys.
-3. **Validate.** Call `validate_section` with the full file. Fix every error and validate again until the result is VALID. Fix warnings unless there's a clear reason not to.
+3. **Validate.** Call `validate_section` with the full file and the store's Wonder version. It also runs Shopify Theme Check against that release, so a `render` of a snippet, an asset or a translation key that the store's Wonder doesn't have is an error. Fix every error and validate again until the result is VALID. Fix warnings unless there's a clear reason not to.
 4. **Hand it over.** Give the user:
    - the complete file in one code block (never a partial diff for a new section) and its file name;
    - the install steps returned with the blueprint (Edit code → Sections → Add a new section → paste → Save → Customize → Add section → Custom);

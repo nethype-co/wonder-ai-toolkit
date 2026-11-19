@@ -58,7 +58,7 @@ In Claude Code the skills load on their own when relevant, or run them directly,
 | `search_docs` | Searches the Wonder documentation |
 | `get_known_issues` | Known bugs and workarounds per Wonder version |
 | `get_section_blueprint` | Starting code for a Wonder-native custom section |
-| `validate_section` | Checks a section file against Shopify schema rules and Wonder conventions |
+| `validate_section` | Checks a section file against Shopify schema rules and Wonder conventions, and runs Shopify Theme Check against the store's Wonder version |
 | `get_changelog` | Release notes: what was added, changed or fixed in which version |
 | `list_sections` | Sections and theme blocks of a Wonder version, with settings counts, block types and limits |
 | `get_section_schema` | Every setting of one section or block, with the labels merchants see in the theme editor |
