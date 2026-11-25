@@ -28,13 +28,15 @@ Ask for the store's Wonder version first (Online Store → Themes, shown under t
    - Don't create or restyle classes starting with `wt-`; they belong to Wonder core.
    - Liquid isn't rendered inside `{% stylesheet %}`. Put values that come from settings in the scoped `<style>` block.
    - Use literal labels in the schema, not `t:` translation keys.
-6. **Validate.** Call `validate_section` with the full file and the version. It checks Shopify's schema rules, runs Shopify Theme Check against that release, and reports where the section departs from Wonder's conventions (`wonder-*` rules: missing standard settings, settings that do nothing, hard-coded colours and fonts, CSS variables or `wt-` classes that don't exist, heading and animation patterns). Fix every error and warning and validate again until the result is VALID with no warnings; treat `wonder-*` info notes as the default unless there's a clear reason not to.
+6. **Validate.** Call `validate_section` with the full file and the version. If the section ships with its own snippets or assets, list them in `files` (e.g. `["snippets/bundle-item.liquid", "assets/bundle.js"]`) and hand them over with the section. It checks Shopify's schema rules, runs Shopify Theme Check against that release, and reports where the section departs from Wonder's conventions (`wonder-*` rules: missing standard settings, settings that do nothing, hard-coded colours and fonts, CSS variables or `wt-` classes that don't exist, heading and animation patterns). Fix every error and warning and validate again until the result is VALID with no warnings; treat `wonder-*` info notes as the default unless there's a clear reason not to.
 7. **Hand it over.** Give the user:
    - the complete file in one code block (never a partial diff for a new section) and its file name;
    - the install steps returned with the blueprint (Edit code → Sections → Add a new section → paste → Save → Customize → Add section → Custom);
    - a reminder that **theme updates don't copy custom section files**: keep a copy and add it to the new theme version before publishing an update.
 
 If the user works in a local theme folder (Shopify CLI), write the file to `sections/custom-<handle>.liquid` instead of pasting, and tell them to preview with `shopify theme dev` before pushing.
+
+If you have a terminal, offer to put the section on a test copy of their theme and send a preview link (the `wonder-test-theme` skill). The live theme stays untouched. If the store is already connected (`.wonder/store.json` exists), take the Wonder version from there instead of asking.
 
 ## Changing an existing custom section
 

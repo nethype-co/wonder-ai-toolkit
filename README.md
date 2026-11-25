@@ -46,6 +46,7 @@ Add a remote MCP server: `https://mcp.wonder-theme.com/mcp` (Streamable HTTP, no
 | `wonder-sections` | New or changed custom sections: blueprint → adapt → validate → ready-to-paste file with install steps |
 | `wonder-troubleshooting` | Something looks wrong: known issues for your version, then docs, then the least invasive fix |
 | `wonder-update` | Moving customisations to a new Wonder version: finds your exact changes, merges them into the new version (three-way), flags conflicts, then check and publish |
+| `wonder-test-theme` | Try changes on the real store: connects it once (myshopify domain + Shopify CLI login as staff/collaborator, or a Theme Access password kept locally), uploads to an unpublished copy of the theme, returns preview and theme editor links |
 | `wonder-javascript` | Custom JavaScript built on Wonder's documented events, cart drawer API and web components |
 | `wonder-setup` | Getting started: connection check, theme version, Shopify admin vs. Shopify CLI workflow |
 
@@ -86,6 +87,8 @@ The plugin sends tool requests to `https://mcp.wonder-theme.com`, operated by Ne
 For usage statistics the server keeps request metadata for up to 90 days: tool name, client name and version, search text (shortened), theme version, result counts, the IDs of failed validation rules, and timing. For `plan_update` this includes the list of changed file paths, which shows us which parts of Wonder merchants customise most.
 
 No code or store data is stored. Cloudflare's standard request logs (which include the IP address) are kept for 7 days for debugging and abuse protection. The plugin has no hooks or scripts. When you update the theme, the `wonder-update` skill runs the npm package [`wonder-theme-update`](https://www.npmjs.com/package/wonder-theme-update) (pinned version, published by Nethype) on your theme folders. It downloads fingerprints (short hashes) of the original release's files and lines from `https://mcp.wonder-theme.com`, then finds your changes and merges them into the new version locally. It never uploads your files.
+
+The `wonder-test-theme` skill uploads changes to an unpublished copy of your theme with Shopify CLI, signed in with your own Shopify account (staff or collaborator) or with a Theme Access password you create. The store domain, theme ids and password stay on your computer (`.wonder/` folder, Shopify CLI's login session). They never reach the Wonder MCP server, and the skill never pushes to the live theme or publishes a theme.
 
 ## Works well with
 
