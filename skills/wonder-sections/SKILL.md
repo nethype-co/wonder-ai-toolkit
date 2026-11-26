@@ -36,7 +36,7 @@ Ask for the store's Wonder version first (Online Store → Themes, shown under t
 
 If the user works in a local theme folder (Shopify CLI), write the file to `sections/custom-<handle>.liquid` instead of pasting, and tell them to preview with `shopify theme dev` before pushing.
 
-If you have a terminal, offer to put the section on a test copy of their theme and send a preview link (the `wonder-test-theme` skill). The live theme stays untouched. If the store is already connected (`.wonder/store.json` exists), take the Wonder version from there instead of asking.
+If you have a terminal, offer to show the section on their store: you upload it to an unpublished preview copy of their theme and send a preview link (the `wonder-preview` skill). They only log in once in the browser; you run the commands. The live theme stays untouched. If the store is already connected (`.wonder/store.json` exists), take the Wonder version from there instead of asking.
 
 ## Changing an existing custom section
 

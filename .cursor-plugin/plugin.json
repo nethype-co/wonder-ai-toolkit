@@ -1,6 +1,6 @@
 {
   "name": "wonder-theme",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Assistant for the Wonder Shopify theme: search the Wonder docs, check known issues and release notes for your theme version, build custom sections that follow Wonder conventions and pass validation, and update a customised theme to a new Wonder version without losing changes. Connects to the hosted Wonder MCP server (mcp.wonder-theme.com); no account needed.",
   "author": {
     "name": "Nethype"
