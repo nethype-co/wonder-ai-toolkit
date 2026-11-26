@@ -6,9 +6,17 @@ Plugin for AI coding agents working on Shopify stores that run the [Wonder theme
 - check **known issues** for the store's Wonder version, with workarounds and the version that fixes them;
 - build **custom sections** that look native to Wonder, stay update-safe and pass validation before you paste them into your store;
 - **update a customised store** to a new Wonder version: find exactly which lines were changed, merge them into the new theme copy automatically, and flag real conflicts;
-- answer **what changed in which version** from the release notes.
+- answer **what changed in which version** from the release notes;
+- **preview changes on your store**: upload them to an unpublished copy of your theme and send you a preview link. Your live theme isn't changed.
 
-The plugin contains five skills and a connection to the hosted Wonder MCP server. No account is needed, and the plugin itself contains no code: only instructions (skills) and the server address.
+The plugin contains six skills and a connection to the hosted Wonder MCP server. No Wonder account is needed, and the plugin itself contains no code: only instructions (skills) and the server address.
+
+**What runs on your computer.** Most skills only talk to the Wonder MCP server. Two skills run other programs, and only when you ask for that task:
+
+- `wonder-preview` uses Shopify's official [Shopify CLI](https://shopify.dev/docs/api/shopify-cli). If it's missing, the agent asks before installing it. It needs you to log in to your store in the browser (or a Theme Access password you create) and uploads only to an unpublished copy of your theme.
+- `wonder-update` runs the npm package [`wonder-theme-update`](https://www.npmjs.com/package/wonder-theme-update) (published by Nethype) on your theme folders. It compares and merges files locally and never uploads them.
+
+**Usage statistics** contain no code and, by default, nothing you type. See [Data and privacy](#data-and-privacy).
 
 ## Install
 

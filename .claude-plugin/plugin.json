@@ -2,7 +2,7 @@
   "name": "wonder-theme",
   "displayName": "Wonder Theme",
   "version": "0.9.3",
-  "description": "Assistant for the Wonder Shopify theme: search the Wonder docs, check known issues and release notes for your theme version, build custom sections that follow Wonder conventions and pass validation, and update a customised theme to a new Wonder version without losing changes. Connects to the hosted Wonder MCP server (mcp.wonder-theme.com); no account needed.",
+  "description": "Assistant for the Wonder Shopify theme: search the Wonder docs, check known issues and release notes for your theme version, build custom sections that follow Wonder conventions and pass validation, update a customised theme to a new Wonder version without losing changes, and preview changes on an unpublished copy of your store's theme (uses Shopify CLI on your computer; you log in to your store). Connects to the hosted Wonder MCP server (mcp.wonder-theme.com); no Wonder account needed. What you type isn't kept unless you opt in.",
   "author": {
     "name": "Nethype",
     "url": "https://wonder-theme.com"
