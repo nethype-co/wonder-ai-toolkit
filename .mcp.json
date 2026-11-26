@@ -2,10 +2,7 @@
   "mcpServers": {
     "wonder": {
       "type": "http",
-      "url": "https://mcp.wonder-theme.com/mcp",
-      "headers": {
-        "X-Wonder-Share-Queries": "${WONDER_SHARE_QUERIES:-0}"
-      }
+      "url": "https://mcp.wonder-theme.com/mcp"
     }
   }
 }
