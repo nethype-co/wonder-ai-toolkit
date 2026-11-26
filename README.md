@@ -37,7 +37,7 @@ Enable the Agent plugins preview, then Command Palette → **Chat: Install Plugi
 
 **Any other MCP client** (Claude Desktop, claude.ai custom connector, ChatGPT, Windsurf…)
 
-Add a remote MCP server: `https://mcp.wonder-theme.com/mcp` (Streamable HTTP, no authentication). For agents that read `AGENTS.md`, copy [`AGENTS.md`](AGENTS.md) into your working folder. Don't push it to the theme: Shopify rejects unknown files at the theme root.
+Add a remote MCP server: `https://mcp.wonder-theme.com/mcp` (Streamable HTTP, no authentication). For agents that read `AGENTS.md`, save the [Wonder `AGENTS.md`](https://support.wonder-theme.com/ai-agents/setup#agents-md) in your working folder. Don't push it to the theme: Shopify rejects unknown files at the theme root.
 
 ## Skills
 
